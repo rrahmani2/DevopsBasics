@@ -3,86 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>January 2023 Calendar</title>
+    <title>Guess the Number</title>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            border: 1px solid #dddddd;
+        body {
             text-align: center;
-            padding: 8px;
+            font-family: Arial, sans-serif;
         }
-        th {
-            background-color: #f2f2f2;
+        h1 {
+            color: #3498db;
         }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
+        #output {
+            font-size: 24px;
+            margin: 20px;
+        }
+        #guess {
+            padding: 5px;
+            font-size: 18px;
+        }
+        #submit {
+            padding: 5px 10px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>January 2023 Calendar</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>1</td>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-                <td>9</td>
-                <td>10</td>
-                <td>11</td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>13</td>
-                <td>14</td>
-                <td>15</td>
-                <td>16</td>
-                <td>17</td>
-                <td>18</td>
-            </tr>
-            <tr>
-                <td>19</td>
-                <td>20</td>
-                <td>21</td>
-                <td>22</td>
-                <td>23</td>
-                <td>24</td>
-                <td>25</td>
-            </tr>
-            <tr>
-                <td>26</td>
-                <td>27</td>
-                <td>28</td>
-                <td>29</td>
-                <td>30</td>
-                <td>31</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    <h1>Guess the Number Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <input type="number" id="guess" min="1" max="100">
+    <button id="submit">Submit</button>
+    <p id="output"></p>
+
+    <script>
+        // Generate a random number between 1 and 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        document.getElementById("submit").addEventListener("click", function() {
+            const userGuess = parseInt(document.getElementById("guess").value);
+            attempts++;
+
+            if (userGuess === randomNumber) {
+                document.getElementById("output").innerHTML = `Congratulations! You guessed the number ${randomNumber} in ${attempts} attempts.`;
+                document.getElementById("submit").disabled = true;
+            } else if (userGuess < randomNumber) {
+                document.getElementById("output").innerHTML = "Try a higher number.";
+            } else {
+                document.getElementById("output").innerHTML = "Try a lower number.";
+            }
+        });
+    </script>
 </body>
 </html>
